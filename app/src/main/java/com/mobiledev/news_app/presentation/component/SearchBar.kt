@@ -109,6 +109,7 @@ fun SearchBar(
                                     dropDownExpanded = false
                                 )
                             }
+                            viewModel.fetchNews()
                         }
                     ) {
                         val isSelected = category == categories[state.selectedCategoryIndex]
@@ -163,7 +164,7 @@ fun SearchBar(
                             innerTextField()
                         }
                         IconButton(onClick = {
-                            // TODO: implement click
+                            viewModel.fetchNews()
                             keyboardController?.hide()
                             focusManager.clearFocus()
                         }

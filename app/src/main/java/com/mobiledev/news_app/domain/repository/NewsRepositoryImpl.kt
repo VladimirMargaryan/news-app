@@ -6,19 +6,26 @@ import androidx.paging.PagingData
 import com.mobiledev.news_app.domain.model.Article
 import com.mobiledev.news_app.domain.repository.paging.NewsPagingSource
 import com.mobiledev.news_app.service.api.NewsApi
+import com.mobiledev.news_app.service.enums.Category
 import kotlinx.coroutines.flow.Flow
 
 class NewsRepositoryImpl(
     private val api: NewsApi
 ) : NewsRepository {
 
-    override fun getNewsPage(): Flow<PagingData<Article>> {
+    override fun getNewsPage(query: String?, category: Category?): Flow<PagingData<Article>> {
         return Pager(
             config = PagingConfig(
                 pageSize = NewsApi.DEFAULT_PAGE_SIZE,
             ),
             pagingSourceFactory = {
-                NewsPagingSource(api)
+                NewsPagingSource(
+                    newsApi = api,
+                    queryParams = mapOf(
+                        Pair("query", query),
+                        Pair("category", category?.queryValue)
+                    )
+                )
             }
         ).flow
     }

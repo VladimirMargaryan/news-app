@@ -26,7 +26,11 @@ class NewsViewModel(
     fun fetchNews() {
         onValueChange {
             copy(
-                articles = repository.getNewsPage().cachedIn(viewModelScope)
+                articles = repository
+                    .getNewsPage(
+                        query = _state.value?.searchQuery,
+                        category = _state.value?.getSelectedCategory(),
+                    ).cachedIn(viewModelScope)
             )
         }
     }
