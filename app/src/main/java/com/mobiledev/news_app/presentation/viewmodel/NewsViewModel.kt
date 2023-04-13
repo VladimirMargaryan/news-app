@@ -20,7 +20,7 @@ class NewsViewModel(
     }
 
     fun onValueChange(transform: NewsState.() -> NewsState) {
-        _state.value = _state.value?.run(transform)
+        _state.value = _state.value?.transform()
     }
 
     fun fetchNews() {
