@@ -14,4 +14,8 @@ data class NewsState(
     val selectedCategoryIndex: Int = 0,
     val dropDownExpanded: Boolean = false,
     val isSwipeRefreshing: Boolean = false
-)
+) {
+    fun getSelectedCategory(): Category {
+        return categories[selectedCategoryIndex]
+    }
+}

@@ -10,6 +10,7 @@ import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.ArrowDropUp
+import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -109,6 +110,7 @@ fun SearchBar(
                                     dropDownExpanded = false
                                 )
                             }
+                            viewModel.fetchNews()
                         }
                     ) {
                         val isSelected = category == categories[state.selectedCategoryIndex]
@@ -162,8 +164,23 @@ fun SearchBar(
                                 )
                             innerTextField()
                         }
+
+                        if (state.searchQuery.isNotBlank()) {
+                            IconButton(onClick = {
+                                viewModel.onValueChange { copy(searchQuery = "") }
+                            }
+                            ) {
+                                Icon(
+                                    imageVector = Icons.Default.Close,
+                                    contentDescription = "remove",
+                                    modifier = Modifier.size(20.dp),
+                                    tint = Color.Gray
+                                )
+                            }
+                        }
+
                         IconButton(onClick = {
-                            // TODO: implement click
+                            viewModel.fetchNews()
                             keyboardController?.hide()
                             focusManager.clearFocus()
                         }

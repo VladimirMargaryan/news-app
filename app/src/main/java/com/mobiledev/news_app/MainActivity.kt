@@ -7,7 +7,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
-import com.mobiledev.news_app.presentation.screen.NewsScreen
+import com.mobiledev.news_app.presentation.navigation.Navigation
 import com.mobiledev.news_app.presentation.viewmodel.NewsViewModel
 import com.mobiledev.news_app.ui.theme.NewsappTheme
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -25,9 +25,9 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.fillMaxSize(),
                         color = MaterialTheme.colors.background,
                     ) {
-                        NewsScreen(
-                            state,
-                            viewModel
+                        Navigation(
+                            state = state,
+                            viewModel = viewModel
                         )
                     }
                 }
